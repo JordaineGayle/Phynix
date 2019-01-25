@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="639dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginBottom="0dp"
+        tools:context=".MapsActivity"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="77dp" />
+
+
+    <RelativeLayout
+        android:id="@+id/rel1"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/white_boarder"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
+
+        <ImageView
+            android:id="@+id/ic_magnify"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/ic_magnify" />
+
+        <AutoCompleteTextView
+            android:id="@+id/input_search"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="0dp"
+            android:layout_toRightOf="@+id/ic_magnify"
+            android:background="@null"
+            android:gravity="center_vertical"
+            android:hint="Enter Address, City or Zip Code"
+            android:padding="7dp"
+            android:textColor="#000"
+            android:textSize="15sp"
+            android:enabled="true"
+            android:focusableInTouchMode="true"
+            android:freezesText="false"
+            android:maxLines="1"
+            android:imeOptions="actionSearch"/>
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/rel1"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:scaleType="centerCrop"
+        android:id="@+id/ic_gps"
+        android:src="@drawable/ic_gps"/>
+
+    <Button
+        android:id="@+id/pickMeUp"
+        android:layout_width="101dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/ic_gps"
+        android:layout_alignEnd="@+id/map"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="128dp"
+        android:layout_marginTop="437dp"
+        android:layout_marginEnd="131dp"
+        android:layout_marginBottom="53dp"
+        android:background="@drawable/border_radius"
+        android:gravity="fill_vertical|center"
+        android:onClick="PickMeUp"
+        android:text="Pick Me Up"
+        android:textColor="@color/colorWhite"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+</RelativeLayout>

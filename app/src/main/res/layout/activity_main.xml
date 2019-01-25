@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    android:paddingLeft="0dp"
+    android:paddingRight="0dp">
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/logo"
+        android:fromXScale="1.0"
+        android:toXScale="1.2"
+        android:fromYScale="1.0"
+        android:toYScale="1.2"
+        android:pivotX="50%"
+        android:pivotY="50%"
+        android:duration="175"/>
+
+
+</RelativeLayout>
