@@ -62,8 +62,15 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.GeoPoint;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.thephynix.www.phynix.models.PlaceInfo;
 
 import org.json.JSONObject;
@@ -78,6 +85,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import okhttp3.OkHttpClient;
 
@@ -101,10 +109,9 @@ public class DashActivity extends AppCompatActivity implements OnMapReadyCallbac
     private static final LatLngBounds LAT_LAN_BOUNDS = new LatLngBounds(new LatLng(-40, -168), new LatLng(71, 136));
     private Button pickMeUp;
     private LatLng MyLatLng;
-
+    private FirebaseFirestore db;
     private PlaceInfo mPlace;
-
-
+    protected LatLng Driver;
 
 
     @Override
@@ -113,7 +120,7 @@ public class DashActivity extends AppCompatActivity implements OnMapReadyCallbac
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.dash_activity);
-
+        db = FirebaseFirestore.getInstance();
 
         pickMeUp = findViewById(R.id.pickMeUp);
         mSearchText = findViewById(R.id.input_search);
@@ -370,6 +377,7 @@ public class DashActivity extends AppCompatActivity implements OnMapReadyCallbac
             Log.d(TAG, "geoLocate: found a location: " + address.toString());
 
             moveCamera(new LatLng(address.getLatitude(), address.getLongitude()), DEFUALT_ZOOM, address.getAddressLine(0));
+
         }
     }
 
@@ -377,20 +385,16 @@ public class DashActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
-        mMap.setMyLocationEnabled(true);
+
+       // mMap.setMyLocationEnabled(true);
         mMap.getUiSettings().setMyLocationButtonEnabled(false);
 
-        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+        /*mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
             public void onMapClick(LatLng latLng) {
 
@@ -434,7 +438,7 @@ public class DashActivity extends AppCompatActivity implements OnMapReadyCallbac
                 }
 
             }
-        });
+        });*/
     }
 
     public void getUserPermissions() {
@@ -600,7 +604,30 @@ public class DashActivity extends AppCompatActivity implements OnMapReadyCallbac
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 Toast.makeText(DashActivity.this, "Processing Information", Toast.LENGTH_LONG).show();
+                mMap.addMarker(new MarkerOptions().position(MyLatLng).title("Me"));
                 pickMeUp.setText("Processing...");
+
+                Map<String, Object> laneInfo = new HashMap<>();
+
+                laneInfo.put("Latitude", MyLatLng.latitude);
+                laneInfo.put("Longitude", MyLatLng.longitude);
+                laneInfo.put("Accepted", false);
+                laneInfo.put("DriverLatitude", MyLatLng.latitude);
+                laneInfo.put("DriverLongitude", MyLatLng.longitude);
+                laneInfo.put("DriverId", "");
+
+                db.collection("lane").document("user_lane").set(laneInfo)
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                Toast.makeText(DashActivity.this, "LaneInfo Added Successfully!", Toast.LENGTH_SHORT).show();
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(DashActivity.this, "Falied To Add LaneInfo", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
 
@@ -618,6 +645,33 @@ public class DashActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        getDriverLocation();
+
+    }
+
+    public void getDriverLocation(){
+        db.collection("lane").whereEqualTo("Accepted", true)
+                .addSnapshotListener(this, new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@javax.annotation.Nullable QuerySnapshot queryDocumentSnapshots, @javax.annotation.Nullable FirebaseFirestoreException e) {
+                        for(QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots){
+
+                            Driver = new LatLng(documentSnapshot.getDouble("DriverLatitude"),documentSnapshot.getDouble("DriverLongitude"));
+                            Toast.makeText(DashActivity.this, "Driver_Latitude: "+documentSnapshot.getLong("DriverLatitude").toString(), Toast.LENGTH_SHORT).show();
+                        }
+
+                        mMap.addMarker(new MarkerOptions().position(Driver).title("Driver Location")
+                                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
+
+                        pickMeUp.setText("Pick Me Up");
+                    }
+                });
     }
 
     @Override
