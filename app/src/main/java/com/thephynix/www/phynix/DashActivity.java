@@ -394,6 +394,13 @@ public class DashActivity extends AppCompatActivity implements OnMapReadyCallbac
        // mMap.setMyLocationEnabled(true);
         mMap.getUiSettings().setMyLocationButtonEnabled(false);
 
+        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+            @Override
+            public void onMapClick(LatLng latLng) {
+                getDriverLocation();
+            }
+        });
+
         /*mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
             public void onMapClick(LatLng latLng) {
@@ -651,7 +658,7 @@ public class DashActivity extends AppCompatActivity implements OnMapReadyCallbac
     protected void onStart() {
         super.onStart();
 
-        getDriverLocation();
+
 
     }
 
