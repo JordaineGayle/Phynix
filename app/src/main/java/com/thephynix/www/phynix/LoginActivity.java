@@ -101,45 +101,53 @@ public class LoginActivity extends AppCompatActivity {
 
                 EditText password = findViewById(R.id.userPassword);
 
+                try {
+                    String userString = username.getText().toString();
+
+                    String passString = password.getText().toString();
+
+                    if(userString.isEmpty() || passString.isEmpty()){
+                        Toast.makeText(getApplicationContext(), "Please enter username and password", Toast.LENGTH_LONG).show();
+                    }else{
+                        mAuth.signInWithEmailAndPassword(userString, passString)
+
+                                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+
+                                    @Override
+
+                                    public void onComplete(@NonNull Task<AuthResult> task) {
+
+                                        if (task.isSuccessful()){
+
+                                            // sign in the user if successful
+
+                                            Intent login = new Intent(LoginActivity.this, DashActivity.class);
+
+                                            LoginActivity.this.startActivity(login);
 
 
-                String userString = username.getText().toString();
 
-                String passString = password.getText().toString();
+                                        }else{
 
+                                            // if sign in fails, tell the user why
 
+                                            Log.w("signIn", "onComplete: failure to login", task.getException());
 
-                mAuth.signInWithEmailAndPassword(userString, passString)
+                                            Toast.makeText(getApplicationContext(), task.getException().getMessage(), Toast.LENGTH_LONG).show();
 
-                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                        }
 
-                            @Override
+                                    }
 
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-
-                                if (task.isSuccessful()){
-
-                                    // sign in the user if successful
-
-                                    Intent login = new Intent(LoginActivity.this, DashActivity.class);
-
-                                    LoginActivity.this.startActivity(login);
+                                });
+                    }
 
 
+                }catch (NullPointerException e) {
+                    Toast.makeText(getApplicationContext(), "Please enter username and password", Toast.LENGTH_LONG).show();
+                }
 
-                                }else{
 
-                                    // if sign in fails, tell the user why
-
-                                    Log.w("signIn", "onComplete: failure to login", task.getException());
-
-                                    Toast.makeText(getApplicationContext(), task.getException().getMessage(), Toast.LENGTH_LONG).show();
-
-                                }
-
-                            }
-
-                        });
 
 
 
