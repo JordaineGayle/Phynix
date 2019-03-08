@@ -236,7 +236,7 @@ public class DashActivity extends AppCompatActivity implements OnMapReadyCallbac
         String output = "json";
 
         // Building the url to the web service
-        String url = "https://maps.googleapis.com/maps/api/directions/" + output + "?" + parameters + "&key=AIzaSyCcDyZAI469w2vNEUZp7y2MalLQqwllEBM";
+        String url = "https://maps.googleapis.com/maps/api/directions/" + output + "?" + parameters + "&key=AIzaSyDruzCHBfmtZuEuQZtvxGiXODYGkI3xSUo";
 
 
         return url;
