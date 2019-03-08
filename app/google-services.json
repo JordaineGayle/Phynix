@@ -1,35 +1,27 @@
 {
   "project_info": {
-    "project_number": "888863675673",
-    "firebase_url": "https://phynix-1527321531905.firebaseio.com",
-    "project_id": "phynix-1527321531905",
-    "storage_bucket": "phynix-1527321531905.appspot.com"
+    "project_number": "599914820705",
+    "firebase_url": "https://thephynix-fde31.firebaseio.com",
+    "project_id": "thephynix-fde31",
+    "storage_bucket": "thephynix-fde31.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:888863675673:android:07ae8114884bf6c9",
+        "mobilesdk_app_id": "1:599914820705:android:07ae8114884bf6c9",
         "android_client_info": {
           "package_name": "com.thephynix.www.phynix"
         }
       },
       "oauth_client": [
         {
-          "client_id": "888863675673-jtuqc196sueed28ssm7cv0mhd8mhdq5u.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.thephynix.www.phynix",
-            "certificate_hash": "a60934aad6b4a1ab0e37c6339b818fc354fb9ccb"
-          }
-        },
-        {
-          "client_id": "888863675673-iu4ljgt7ke049ddp078mk4jf1g5l1a1c.apps.googleusercontent.com",
+          "client_id": "599914820705-bed3arkrqnv2l3fj7j1otrjedb3gk8up.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBXdMo9NDtnoK3qbTJ5FVXLsPDzRakTCAk"
+          "current_key": "AIzaSyA9vm0VRFW8-5KyxIesS7Q7W46JQ0sd9YM"
         }
       ],
       "services": {
@@ -37,13 +29,8 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 2,
-          "other_platform_oauth_client": [
-            {
-              "client_id": "888863675673-iu4ljgt7ke049ddp078mk4jf1g5l1a1c.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "status": 1,
+          "other_platform_oauth_client": []
         },
         "ads_service": {
           "status": 2
