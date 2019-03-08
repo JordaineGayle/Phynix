@@ -176,19 +176,17 @@ public class RegisterScreen extends AppCompatActivity {
 
     private void buttonAndTextCreation(){
 
-        username = findViewById(convertRes(0));
+        password = findViewById(convertRes(0));
 
-        password = findViewById(convertRes(1));
+        fname = findViewById(convertRes(1));
 
-        fname = findViewById(convertRes(2));
+        lname = findViewById(convertRes(2));
 
-        lname = findViewById(convertRes(3));
+        email = findViewById(convertRes(3));
 
-        email = findViewById(convertRes(4));
+        tele = findViewById(convertRes(4));
 
-        tele = findViewById(convertRes(5));
-
-        saveInfo = findViewById(convertRes(7));
+        saveInfo = findViewById(convertRes(5));
 
         returnToLogin = findViewById(convertRes(6));
 
@@ -210,21 +208,20 @@ public class RegisterScreen extends AppCompatActivity {
 
     private void populatingArrayList(){
 
-        resArry.add(0, R.id.username);
 
-        resArry.add(1, R.id.password);
+        resArry.add(0, R.id.password);
 
-        resArry.add(2, R.id.fname);
+        resArry.add(1, R.id.fname);
 
-        resArry.add(3, R.id.lname);
+        resArry.add(2, R.id.lname);
 
-        resArry.add(4, R.id.email);
+        resArry.add(3, R.id.email);
 
-        resArry.add(5, R.id.tele);
+        resArry.add(4, R.id.tele);
 
-        resArry.add(6, R.id.returnToLogin);
+        resArry.add(5, R.id.returnToLogin);
 
-        resArry.add(7, R.id.saveInfo);
+        resArry.add(6, R.id.saveInfo);
 
     }
 

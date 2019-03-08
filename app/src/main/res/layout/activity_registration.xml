@@ -349,7 +349,7 @@
         android:layout_height="45dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="24dp"
         android:background="@drawable/border_bottom"
         android:editable="true"
         android:ems="10"
@@ -376,7 +376,7 @@
         android:layout_height="45dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="36dp"
         android:background="@drawable/border_bottom"
         android:editable="true"
         android:ems="10"
@@ -393,7 +393,7 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/email"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
@@ -401,6 +401,7 @@
         android:layout_width="0dp"
         android:layout_height="45dp"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/border_bottom"
@@ -420,36 +421,9 @@
         app:layout_constraintBottom_toTopOf="@+id/lname"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <EditText
-        android:id="@+id/username"
-        android:layout_width="0dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:background="@drawable/border_bottom"
-        android:editable="true"
-        android:ems="10"
-        android:enabled="true"
-        android:focusableInTouchMode="true"
-        android:freezesText="false"
-        android:gravity="center_vertical|center_horizontal"
-        android:hint="@string/username"
-        android:inputType="text|textPersonName"
-        android:textAlignment="center"
-        android:textColor="@android:color/white"
-        android:textColorHint="@color/colorWhite"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/fname"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view4"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.872" />
 
     <EditText
         android:id="@+id/email"
@@ -457,7 +431,7 @@
         android:layout_height="45dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="36dp"
         android:background="@drawable/border_bottom"
         android:editable="true"
         android:ems="10"
